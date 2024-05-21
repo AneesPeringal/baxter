@@ -1,0 +1,34 @@
+<html>
+<head>
+<title>intera_core_msgs/InteractionControlCommand Documentation</title>
+<link type="text/css" rel="stylesheet" href="../msg-styles.css" />
+</head>
+<body>
+
+<div id="container">
+
+<h1 class="msg-title"><a href="../index-msg.html">intera_core_msgs</a>/InteractionControlCommand Message</h1>
+
+<div class="msg">
+
+<h2>File: <span class="filename">intera_core_msgs/InteractionControlCommand.msg</filename></h2>
+
+<h2>Raw Message Definition</h2>
+<div class="raw-msg">
+<font color="blue">#&nbsp;Message&nbsp;sets&nbsp;the&nbsp;interaction&nbsp;(impedance/force)&nbsp;control&nbsp;on&nbsp;or&nbsp;off</font><br/><font color="blue">#&nbsp;It&nbsp;also&nbsp;contains&nbsp;desired&nbsp;cartesian&nbsp;stiffness&nbsp;K,&nbsp;damping&nbsp;D,&nbsp;and&nbsp;force&nbsp;values</font><br/><br/>Header&nbsp;header<br/>bool&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interaction_control_active<br/><br/><font color="blue">##&nbsp;Cartesian&nbsp;Impedance&nbsp;Control&nbsp;Parameters</font><br/><font color="blue">#&nbsp;Stiffness&nbsp;units&nbsp;are&nbsp;(N/m)&nbsp;for&nbsp;first&nbsp;3&nbsp;and&nbsp;(Nm/rad)&nbsp;for&nbsp;second&nbsp;3&nbsp;values</font><br/>float64[]&nbsp;K_impedance<br/><font color="blue">#&nbsp;Force&nbsp;certain&nbsp;directions&nbsp;to&nbsp;have&nbsp;maximum&nbsp;possible&nbsp;impedance&nbsp;for&nbsp;a&nbsp;given&nbsp;pose</font><br/>bool[]&nbsp;max_impedance<br/><font color="blue">#&nbsp;Damping&nbsp;units&nbsp;are&nbsp;(Ns/m)&nbsp;for&nbsp;first&nbsp;3&nbsp;and&nbsp;(Nms/rad)&nbsp;for&nbsp;the&nbsp;second&nbsp;3&nbsp;values</font><br/>float64[]&nbsp;D_impedance<br/><font color="blue">#&nbsp;Joint&nbsp;Nullspace&nbsp;stiffness&nbsp;units&nbsp;are&nbsp;in&nbsp;(Nm/rad)&nbsp;(length&nbsp;==&nbsp;number&nbsp;of&nbsp;joints)</font><br/>float64[]&nbsp;K_nullspace<br/><br/><font color="blue">##&nbsp;Parameters&nbsp;for&nbsp;force&nbsp;control&nbsp;or&nbsp;impedance&nbsp;control&nbsp;with&nbsp;force&nbsp;limit</font><br/><font color="blue">#&nbsp;If&nbsp;in&nbsp;force&nbsp;mode,&nbsp;this&nbsp;is&nbsp;the&nbsp;vector&nbsp;of&nbsp;desired&nbsp;forces/torques</font><br/><font color="blue">#&nbsp;to&nbsp;be&nbsp;regulated&nbsp;in&nbsp;(N)&nbsp;and&nbsp;(Nm)</font><br/><font color="blue">#&nbsp;If&nbsp;in&nbsp;impedance&nbsp;with&nbsp;force&nbsp;limit&nbsp;mode,&nbsp;this&nbsp;vector&nbsp;specifies&nbsp;the</font><br/><font color="blue">#&nbsp;magnitude&nbsp;of&nbsp;forces/torques&nbsp;(N&nbsp;and&nbsp;Nm)&nbsp;that&nbsp;the&nbsp;command&nbsp;will&nbsp;not&nbsp;exceed.</font><br/>float64[]&nbsp;force_command<br/><br/><font color="blue">##&nbsp;Desired&nbsp;frame</font><br/>geometry_msgs/Pose&nbsp;interaction_frame<br/>string&nbsp;endpoint_name<br/><font color="blue">#&nbsp;True&nbsp;if&nbsp;impedance&nbsp;and&nbsp;force&nbsp;commands&nbsp;are&nbsp;defined&nbsp;in&nbsp;endpoint&nbsp;frame</font><br/>bool&nbsp;in_endpoint_frame<br/><br/><font color="blue">##&nbsp;Mode&nbsp;Selection&nbsp;Parameters</font><br/><font color="blue">#&nbsp;The&nbsp;possible&nbsp;interaction&nbsp;control&nbsp;modes&nbsp;are:</font><br/><font color="blue">#&nbsp;Impedance&nbsp;mode:&nbsp;implements&nbsp;desired&nbsp;endpoint&nbsp;stiffness&nbsp;and&nbsp;damping.</font><br/>uint8&nbsp;IMPEDANCE_MODE=1<br/><font color="blue">#&nbsp;Force&nbsp;mode:&nbsp;applies&nbsp;force/torque&nbsp;in&nbsp;the&nbsp;specified&nbsp;dimensions.</font><br/>uint8&nbsp;FORCE_MODE=2<br/><font color="blue">#&nbsp;Impedance&nbsp;with&nbsp;force&nbsp;limit:&nbsp;impedance&nbsp;control&nbsp;while&nbsp;ensuring&nbsp;the&nbsp;commanded</font><br/><font color="blue">#&nbsp;forces/torques&nbsp;do&nbsp;not&nbsp;exceed&nbsp;force_command.</font><br/>uint8&nbsp;IMPEDANCE_WITH_FORCE_LIMIT_MODE=3<br/><font color="blue">#&nbsp;Force&nbsp;with&nbsp;motion&nbsp;bounds:&nbsp;force&nbsp;control&nbsp;while&nbsp;ensuring&nbsp;the&nbsp;current</font><br/><font color="blue">#&nbsp;pose/velocities&nbsp;do&nbsp;not&nbsp;exceed&nbsp;forceMotionThreshold&nbsp;(currenetly&nbsp;defined&nbsp;in&nbsp;yaml)</font><br/>uint8&nbsp;FORCE_WITH_MOTION_LIMIT_MODE=4<br/><br/><font color="blue">#&nbsp;Specifies&nbsp;the&nbsp;interaction&nbsp;control&nbsp;mode&nbsp;for&nbsp;each&nbsp;Cartesian&nbsp;dimension&nbsp;(6)</font><br/>uint8[]&nbsp;interaction_control_mode<br/><br/><font color="blue">#&nbsp;All&nbsp;6&nbsp;values&nbsp;in&nbsp;force&nbsp;and&nbsp;impedance&nbsp;parameter&nbsp;vectors&nbsp;have&nbsp;to&nbsp;be&nbsp;filled,</font><br/><font color="blue">#&nbsp;If&nbsp;a&nbsp;control&nbsp;mode&nbsp;is&nbsp;not&nbsp;used&nbsp;in&nbsp;a&nbsp;Cartesian&nbsp;dimension,</font><br/><font color="blue">#&nbsp;the&nbsp;corresponding&nbsp;parameters&nbsp;will&nbsp;be&nbsp;ignored.</font><br/><br/>
+</div>
+
+<h2>Compact Message Definition</h2>
+<div class="fancy-msg">
+uint8 IMPEDANCE_MODE=1<br />uint8 FORCE_MODE=2<br />uint8 IMPEDANCE_WITH_FORCE_LIMIT_MODE=3<br />uint8 FORCE_WITH_MOTION_LIMIT_MODE=4<br /><a href="../../../std_msgs/html/msg/Header.html">std_msgs/Header</a> header<br />bool interaction_control_active<br />float64[] K_impedance<br />bool[] max_impedance<br />float64[] D_impedance<br />float64[] K_nullspace<br />float64[] force_command<br /><a href="../../../geometry_msgs/html/msg/Pose.html">geometry_msgs/Pose</a> interaction_frame<br />string endpoint_name<br />bool in_endpoint_frame<br />uint8[] interaction_control_mode<br />
+</div>
+
+
+</div>
+
+<p class="footer"><small><em>autogenerated on Tue, 25 Apr 2017 14:24:00</em></small></p>
+
+</div>
+
+</body>
+</html>

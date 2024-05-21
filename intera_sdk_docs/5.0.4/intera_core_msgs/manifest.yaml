@@ -1,0 +1,56 @@
+actions:
+- CalibrationCommand
+authors: Rethink Robotics Inc.
+brief: ''
+bugtracker: https://github.com/RethinkRobotics/intera_common/issues
+depends:
+- catkin
+- sensor_msgs
+- actionlib_msgs
+- message_runtime
+- std_msgs
+- geometry_msgs
+- message_generation
+description: "Messages and Services required for communication with the Intera\n \
+  \   Robots from Rethink Robotics."
+license: BSD
+maintainers: Rethink Robotics Inc. <rsdk.support@rethinkrobotics.com>
+msgs:
+- NavigatorStates
+- HomingCommand
+- AnalogIOStates
+- URDFConfiguration
+- JointLimits
+- IOComponentConfiguration
+- IONodeConfiguration
+- DigitalIOState
+- JointCommand
+- CollisionAvoidanceState
+- CollisionDetectionState
+- HomingState
+- IODeviceStatus
+- SEAJointState
+- EndpointStates
+- EndpointState
+- AssemblyState
+- DigitalIOStates
+- IODataStatus
+- IOComponentStatus
+- HeadState
+- IODeviceConfiguration
+- IOStatus
+- DigitalOutputCommand
+- AnalogIOState
+- IONodeStatus
+- HeadPanCommand
+- NavigatorState
+- AssemblyStates
+- IOComponentCommand
+- AnalogOutputCommand
+package_type: package
+repo_url: https://github.com/RethinkRobotics/intera_common
+srvs:
+- SolvePositionIK
+- SolvePositionFK
+- IOComponentCommandSrv
+url: http://sdk.rethinkrobotics.com/intera/

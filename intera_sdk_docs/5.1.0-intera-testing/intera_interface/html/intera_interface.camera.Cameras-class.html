@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>intera_interface.camera.Cameras</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="intera_interface-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://sdk.rethinkrobotics.com/intera/">Project Homepage</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="intera_interface-module.html">Package&nbsp;intera_interface</a> ::
+        <a href="intera_interface.camera-module.html">Module&nbsp;camera</a> ::
+        Class&nbsp;Cameras
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="intera_interface.camera.Cameras-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Cameras</h1><p class="nomargin-top"><span class="codelink"><a href="intera_interface.camera-pysrc.html#Cameras">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+object --+
+         |
+        <strong class="uidshort">Cameras</strong>
+</pre>
+
+<hr />
+<p>Base class for the interface to the robot's Cameras.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="intera_interface.camera.Cameras-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Constructor.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="intera_interface.camera-pysrc.html#Cameras.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">bool</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="intera_interface.camera.Cameras-class.html#_camera_streaming_status" class="summary-sig-name" onclick="show_private();">_camera_streaming_status</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">camera_name</span>)</span><br />
+      Private function to check if the camera is currently in streaming 
+      mode.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="intera_interface.camera-pysrc.html#Cameras._camera_streaming_status">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">[str]</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="intera_interface.camera.Cameras-class.html#list_cameras" class="summary-sig-name">list_cameras</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Return the list of all camera names on current robot.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="intera_interface.camera-pysrc.html#Cameras.list_cameras">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">bool</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="intera_interface.camera.Cameras-class.html#verify_camera_exists" class="summary-sig-name">verify_camera_exists</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">camera_name</span>)</span><br />
+      Verify if the given camera name is in the list of camera names or 
+      not.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="intera_interface.camera-pysrc.html#Cameras.verify_camera_exists">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">bool</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="intera_interface.camera.Cameras-class.html#is_camera_streaming" class="summary-sig-name">is_camera_streaming</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">camera_name</span>)</span><br />
+      Check the given camera name is streaming or not.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="intera_interface.camera-pysrc.html#Cameras.is_camera_streaming">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="intera_interface.camera.Cameras-class.html#set_callback" class="summary-sig-name">set_callback</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">camera_name</span>,
+        <span class="summary-sig-arg">callback</span>,
+        <span class="summary-sig-arg">callback_args</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">queue_size</span>=<span class="summary-sig-default">10</span>,
+        <span class="summary-sig-arg">rectify_image</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Setup the callback function to show image.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="intera_interface.camera-pysrc.html#Cameras.set_callback">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">bool</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="intera_interface.camera.Cameras-class.html#start_streaming" class="summary-sig-name">start_streaming</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">camera_name</span>)</span><br />
+      Start camera streaming for the given camera name, This only allows 
+      one camera open at one time and forces closed any other open cameras 
+      before open the wanted one.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="intera_interface.camera-pysrc.html#Cameras.start_streaming">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">bool</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="intera_interface.camera.Cameras-class.html#stop_streaming" class="summary-sig-name">stop_streaming</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">camera_name</span>)</span><br />
+      Stop camera streaming by given the camera name.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="intera_interface.camera-pysrc.html#Cameras.stop_streaming">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="intera_interface.camera-pysrc.html#Cameras.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Constructor.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_camera_streaming_status"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_camera_streaming_status</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">camera_name</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="intera_interface.camera-pysrc.html#Cameras._camera_streaming_status">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Private function to check if the camera is currently in streaming 
+  mode.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>camera_name</code></strong> (str) - camera name</li>
+    </ul></dd>
+    <dt>Returns: bool</dt>
+        <dd>True if the camera is streaming, False otherwise</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="list_cameras"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">list_cameras</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="intera_interface.camera-pysrc.html#Cameras.list_cameras">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return the list of all camera names on current robot.</p>
+  <dl class="fields">
+    <dt>Returns: [str]</dt>
+        <dd>ordered list of camera names</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="verify_camera_exists"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">verify_camera_exists</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">camera_name</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="intera_interface.camera-pysrc.html#Cameras.verify_camera_exists">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Verify if the given camera name is in the list of camera names or 
+  not.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>camera_name</code></strong> (str) - camera name</li>
+    </ul></dd>
+    <dt>Returns: bool</dt>
+        <dd>True if the name exists in camera name list, False otherwise.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="is_camera_streaming"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">is_camera_streaming</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">camera_name</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="intera_interface.camera-pysrc.html#Cameras.is_camera_streaming">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Check the given camera name is streaming or not.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>camera_name</code></strong> (str) - camera name</li>
+    </ul></dd>
+    <dt>Returns: bool</dt>
+        <dd>True if the camera is streaming, False camera is not streaming, 
+          False with log error means camera name not exists in camera name 
+          list</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_callback"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_callback</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">camera_name</span>,
+        <span class="sig-arg">callback</span>,
+        <span class="sig-arg">callback_args</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">queue_size</span>=<span class="sig-default">10</span>,
+        <span class="sig-arg">rectify_image</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="intera_interface.camera-pysrc.html#Cameras.set_callback">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Setup the callback function to show image.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>camera_name</code></strong> (str) - camera name</li>
+        <li><strong class="pname"><code>callback</code></strong> (fn(msg, cb_args)) - function to call when data is received</li>
+        <li><strong class="pname"><code>callback_args</code></strong> (any) - additional arguments to pass to the callback</li>
+        <li><strong class="pname"><code>queue_size</code></strong> (int) - maximum number of messages to receive at a time</li>
+        <li><strong class="pname"><code>rectify_image</code></strong> (bool) - specify whether subscribe to the rectified or raw (unrectified) 
+          image topic</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="start_streaming"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">start_streaming</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">camera_name</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="intera_interface.camera-pysrc.html#Cameras.start_streaming">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Start camera streaming for the given camera name, This only allows one
+  camera open at one time and forces closed any other open cameras before 
+  open the wanted one.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>camera_name</code></strong> (str) - camera name</li>
+    </ul></dd>
+    <dt>Returns: bool</dt>
+        <dd>False if camera not exists in camera_name_list or the interface 
+          is not able to stop streaming other camera. Additionally, returns
+          False if the interface is not able to start streaming the desired
+          camera. Returns True if the camera already streaming or the 
+          camera successfully start streaming.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="stop_streaming"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">stop_streaming</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">camera_name</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="intera_interface.camera-pysrc.html#Cameras.stop_streaming">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Stop camera streaming by given the camera name.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>camera_name</code></strong> (str) - camera name</li>
+    </ul></dd>
+    <dt>Returns: bool</dt>
+        <dd>False if camera not exists in camera name list or not able to 
+          stop streaming camera. True if the camera not is streaming mode 
+          or the camera successfully stop streaming.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="intera_interface-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://sdk.rethinkrobotics.com/intera/">Project Homepage</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Apr 25 18:23:58 2017
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+actions: []
+authors: Rethink Robotics Inc.
+brief: ''
+bugtracker: https://github.com/RethinkRobotics/intera_sdk/issues
+depends:
+- intera_core_msgs
+- dynamic_reconfigure
+- catkin
+- std_msgs
+- actionlib
+- trajectory_msgs
+- sensor_msgs
+- xacro
+- rospy
+- control_msgs
+- cv_bridge
+description: "Python interface classes for control of\n    Intera-enable Robots from\
+  \ Rethink Robotics."
+license: Apache 2.0
+maintainers: Rethink Robotics Inc. <rsdk.support@rethinkrobotics.com>
+msgs: []
+package_type: package
+repo_url: https://github.com/RethinkRobotics/intera_sdk
+srvs: []
+url: http://sdk.rethinkrobotics.com/intera/
