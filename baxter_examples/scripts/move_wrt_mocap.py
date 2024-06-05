@@ -8,13 +8,11 @@ import copy
 import tf
 import rospy
 import numpy as np
-
 import math
 import rospkg
 import baxter_interface
 from baxter_interface import CHECK_VERSION
 from baxter_pykdl import baxter_kinematics
-i
 # from scipy.spatial.transform import Rotation
  
 from geometry_msgs.msg import (
@@ -47,7 +45,6 @@ class PickAndPlace(object):
         self._gripper.calibrate()
         print("Enabling robot... ")
         self._rs.enable()
-        self.mocap_config = 
  
         self.kin = baxter_kinematics(limb)
         self.listener = tf.TransformListener()
@@ -156,93 +153,34 @@ class PickAndPlace(object):
         return trans, rot
 
 
-# def euler_to_quaternion(roll, pitch, yaw):
-
-#     qx = np.sin(roll/2) * np.cos(pitch/2) * np.cos(yaw/2) - np.cos(roll/2) * np.sin(pitch/2) * np.sin(yaw/2)
-#     qy = np.cos(roll/2) * np.sin(pitch/2) * np.cos(yaw/2) + np.sin(roll/2) * np.cos(pitch/2) * np.sin(yaw/2)
-#     qz = np.cos(roll/2) * np.cos(pitch/2) * np.sin(yaw/2) - np.sin(roll/2) * np.sin(pitch/2) * np.cos(yaw/2)
-#     qw = np.cos(roll/2) * np.cos(pitch/2) * np.cos(yaw/2) + np.sin(roll/2) * np.sin(pitch/2) * np.sin(yaw/2)
-
-#     return [qx, qy, qz, qw]   
-
 def euler_to_quaternion(roll, pitch, yaw):
-    """
-    Convert Euler angles (roll, pitch, yaw) to a quaternion (q_w, q_x, q_y, q_z)
-    Args:
-    roll: Rotation around the x-axis in radians
-    pitch: Rotation around the y-axis in radians
-    yaw: Rotation around the z-axis in radians
-    Returns:
-    q_w, q_x, q_y, q_z: components of the quaternion
-    """
-    # Calculate the quaternion components
-    cy = math.cos(yaw * 0.5)
-    sy = math.sin(yaw * 0.5)
-    cp = math.cos(pitch * 0.5)
-    sp = math.sin(pitch * 0.5)
-    cr = math.cos(roll * 0.5)
-    sr = math.sin(roll * 0.5)
- 
-    q_w = cr * cp * cy + sr * sp * sy
-    q_x = sr * cp * cy - cr * sp * sy
-    q_y = cr * sp * cy + sr * cp * sy
-    q_z = cr * cp * sy - sr * sp * cy
-    return q_w, q_x, q_y, q_z
- 
 
+    qx = np.sin(roll/2) * np.cos(pitch/2) * np.cos(yaw/2) - np.cos(roll/2) * np.sin(pitch/2) * np.sin(yaw/2)
+    qy = np.cos(roll/2) * np.sin(pitch/2) * np.cos(yaw/2) + np.sin(roll/2) * np.cos(pitch/2) * np.sin(yaw/2)
+    qz = np.cos(roll/2) * np.cos(pitch/2) * np.sin(yaw/2) - np.sin(roll/2) * np.sin(pitch/2) * np.cos(yaw/2)
+    qw = np.cos(roll/2) * np.cos(pitch/2) * np.cos(yaw/2) + np.sin(roll/2) * np.sin(pitch/2) * np.sin(yaw/2)
+
+    return [qx, qy, qz, qw]   
  
-# def quaternion_to_euler(x, y, z, w):
+def quaternion_to_euler(x, y, z, w):
     
-#         t0 = +2.0 * (w * x + y * z)
-#         t1 = +1.0 - 2.0 * (x * x + y * y)
-#         X = math.atan2(t0, t1)
+        t0 = +2.0 * (w * x + y * z)
+        t1 = +1.0 - 2.0 * (x * x + y * y)
+        X = math.atan2(t0, t1)
 
-#         t2 = +2.0 * (w * y - z * x)
-#         t2 = +1.0 if t2 > +1.0 else t2
-#         t2 = -1.0 if t2 < -1.0 else t2
-#         Y = math.asin(t2)
+        t2 = +2.0 * (w * y - z * x)
+        t2 = +1.0 if t2 > +1.0 else t2
+        t2 = -1.0 if t2 < -1.0 else t2
+        Y = math.asin(t2)
 
-#         t3 = +2.0 * (w * z + x * y)
-#         t4 = +1.0 - 2.0 * (y * y + z * z)
-#         Z = math.atan2(t3, t4)
+        t3 = +2.0 * (w * z + x * y)
+        t4 = +1.0 - 2.0 * (y * y + z * z)
+        Z = math.atan2(t3, t4)
 
-#         return X, Y, Z
-
-def quaternion_to_euler(q_w, q_x, q_y, q_z):
-    """
-    Convert a quaternion into Euler angles (roll, pitch, yaw)
-    Roll is rotation around x-axis (phi)
-    Pitch is rotation around y-axis (theta)
-    Yaw is rotation around z-axis (psi)
-    Args:
-    q_w, q_x, q_y, q_z: components of the quaternion
- 
-    Returns:
-    roll, pitch, yaw: Euler angles in radians
-    """
-    # Calculate roll (x-axis rotation)
-    sinr_cosp = 2 * (q_w * q_x + q_y * q_z)
-    cosr_cosp = 1 - 2 * (q_x * q_x + q_y * q_y)
-    roll = math.atan2(sinr_cosp, cosr_cosp)
-    # Calculate pitch (y-axis rotation)
-    sinp = 2 * (q_w * q_y - q_z * q_x)
-    if abs(sinp) >= 1:
-        pitch = math.copysign(math.pi / 2, sinp)  # Use 90 degrees if out of range
-    else:
-        pitch = math.asin(sinp)
-    # Calculate yaw (z-axis rotation)
-    siny_cosp = 2 * (q_w * q_z + q_x * q_y)
-    cosy_cosp = 1 - 2 * (q_y * q_y + q_z * q_z)
-    yaw = math.atan2(siny_cosp, cosy_cosp)
-    return roll, pitch, yaw
+        return X, Y, Z
  
 def main():
-    roll = 0.7
-    pitch = 0.5
-    yaw = 0.2
-    
-    x,y,z,w = euler_to_quaternion(roll, pitch, yaw)
-    print(quaternion_to_euler(x,y,z,w))
+ 
     rospy.init_node("ik_pick_and_place_demo")
  
     limb = 'left'
@@ -269,11 +207,8 @@ def main():
 
     pnp_left = PickAndPlace(limb, hover_distance)
     pnp_right = PickAndPlace('right', hover_distance)
-    trans, rot = pnp_left.get_tf_start_to_end_frames('left_hand','base')
-    # trans, rot = pp_left.get_tf_start_to_end_frames('Robot_1/base_link', 'base')
-    print(rot)
-    pnp_left.move_to_start(starting_joint_angles_left)
-    pnp_right.move_to_start(starting_joint_angles_right)
+    # pnp_left.move_to_start(starting_joint_angles_left)
+    # pnp_right.move_to_start(starting_joint_angles_right)
     # An orientation for gripper fingers to be overhead and parallel to the obj
 
     # Move to the desired starting angles
@@ -281,7 +216,7 @@ def main():
     while True:
         print("collecting current_pose")
         current_pose_left = pnp_left._limb.endpoint_pose()
-
+        
         current_orientation_left = Quaternion(
                                     x = current_pose_left['orientation'].x,
                                     y = current_pose_left['orientation'].y,
@@ -293,15 +228,17 @@ def main():
         print("yaw = ", yaw_left, "\n")
         # print("Current pose left= ", current_pose_left)
         # print("\n")
-        current_pose_right = pnp_right._limb.endpoint_pose()
+        # current_pose_right = pnp_right._limb.endpoint_pose()
+        trans_right, rot_right = pnp_left.get_tf_start_to_end_frames('Robot_1/base_link', 'base')
+    
         current_orientation_right = Quaternion(
-                                    x = current_pose_right['orientation'].x,
-                                    y = current_pose_right['orientation'].y,
-                                    z = current_pose_right['orientation'].z,
-                                    w = current_pose_right['orientation'].w)
+                                    x = rot_right[0],
+                                    y = rot_right[1],
+                                    z = rot_right[2],
+                                    w = rot_right[3])
         # print("Current pose right= ", current_pose_right)
         # print("\n")
-        roll_right, pitch_right, yaw_right = quaternion_to_euler(current_pose_right['orientation'].x, current_pose_right['orientation'].y, current_pose_right['orientation'].z, current_pose_right['orientation'].w)
+        roll_right, pitch_right, yaw_right = quaternion_to_euler(rot_right[0], rot_right[1], rot_right[2], rot_right)
 
         x_increment_left = input("x increment for left arm = ")
         y_increment_left = input("y increment for left arm = ")
@@ -332,18 +269,18 @@ def main():
         pose_left = Pose(position=Point(x=current_pose_left['position'].x+float(x_increment_left), y= current_pose_left['position'].y+float(y_increment_left), z= current_pose_left['position'].z+float(z_increment_left)),
                         orientation=new_orientation_left)
         print("new pose left = ",pose_left)
-        pose_right = Pose(position=Point(x=current_pose_right['position'].x+float(x_increment_right), y= current_pose_right['position'].y+float(y_increment_right), z= current_pose_right['position'].z+float(z_increment_right)),
+        pose_right = Pose(position=Point(x= trans_right[0]+float(x_increment_right), y= trans_right[1]+float(y_increment_right), z= trans_right[2]+float(z_increment_right)),
                         orientation=new_orientation_right)
         print("new pose right = ",pose_right)
         joint_angles_left = pnp_left.ik_request(pose_left)
         print(joint_angles_left)
         joint_angles_right = pnp_right.ik_request(pose_right)
-
-        try:
-            pnp_left._guarded_move_to_joint_position(joint_angles_left)
-            pnp_right._guarded_move_to_joint_position(joint_angles_right)
-        except:
-            print("did not converge \n")
+        print(joint_angles_right)
+        # try:
+        #     # pnp_left._guarded_move_to_joint_position(joint_angles_left)
+        #     # pnp_right._guarded_move_to_joint_position(joint_angles_right)
+        # except:
+        #     print("did not converge \n")
 
     return 0
  

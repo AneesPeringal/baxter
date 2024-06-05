@@ -99,7 +99,7 @@ class PickAndPlace(object):
  
     def _servo_to_pose(self, pose):
         # servo down to release
-        #joint_angles = self.ik_request(pose)
+        joint_angles = self.ik_request(pose)
 
         self._guarded_move_to_joint_position(joint_angles)
  
@@ -150,16 +150,16 @@ def main():
     pnp = PickAndPlace(limb, hover_distance)
     # An orientation for gripper fingers to be overhead and parallel to the obj
     overhead_orientation = Quaternion(
-                             x=-0.5031,#0.4149590815779,
-                             y= 0.850,#0.479649402929,
-                             z= -0.061,#-0.020637916180073,
-                             w=0.14214286450832011)
+                             x= 0.142,#0.4149590815779,
+                             y= 0.990,#0.479649402929,
+                             z= 0.0081,#-0.020637916180073,
+                             w=0.0214286450832011)
  
     # Move to the desired starting angles
     #pnp.move_to_start(starting_joint_angles)
 
     idx = 0
-    pose = Pose(position=Point(x=0.6363, y=0.291, z=-0.467),
+    pose = Pose(position=Point(x=0.576, y=0.179, z=0.25),
                     orientation=overhead_orientation)
  
     pnp._servo_to_pose(pose)

@@ -145,7 +145,6 @@ class baxter_kinematics(object):
         else:
             goal_pose = PyKDL.Frame(pos)
         result_angles = PyKDL.JntArray(self._num_jnts)
-
         if self._ik_p_kdl.CartToJnt(seed_array, goal_pose, result_angles) >= 0:
             result = np.array(list(result_angles))
             return result
