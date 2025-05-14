@@ -29,7 +29,6 @@
 
 import numpy as np
 import PyKDL
-
 import rospy
 
 import baxter_interface
@@ -45,10 +44,12 @@ class baxter_kinematics(object):
         self._baxter = URDF.from_parameter_server(key='robot_description')
         self._kdl_tree = kdl_tree_from_urdf_model(self._baxter)
         self._base_link = self._baxter.get_root()
-        self._tip_link = limb + '_gripper'
+        self._tip_link = limb + '_gripper_base'
         self._tip_frame = PyKDL.Frame()
         self._arm_chain = self._kdl_tree.getChain(self._base_link,
                                                   self._tip_link)
+
+        print(self._base_link, self._tip_link)
 
         # Baxter Interface Limb Instances
         self._limb_interface = baxter_interface.Limb(limb)
@@ -62,6 +63,7 @@ class baxter_kinematics(object):
         self._ik_p_kdl = PyKDL.ChainIkSolverPos_NR(self._arm_chain,
                                                    self._fk_p_kdl,
                                                    self._ik_v_kdl)
+        self._ik_p_lma_kdl = PyKDL.ChainIkSolverPos_LMA(self._arm_chain,eps = 1e-12)
         self._jac_kdl = PyKDL.ChainJntToJacSolver(self._arm_chain)
         self._dyn_kdl = PyKDL.ChainDynParam(self._arm_chain,
                                             PyKDL.Vector.Zero())
@@ -108,6 +110,7 @@ class baxter_kinematics(object):
         return mat
 
     def forward_position_kinematics(self,joint_values=None):
+        
         end_frame = PyKDL.Frame()
         self._fk_p_kdl.JntToCart(self.joints_to_kdl('positions',joint_values),
                                  end_frame)
@@ -123,9 +126,37 @@ class baxter_kinematics(object):
                                  end_frame)
         return end_frame.GetTwist()
 
+    def inverse_kinematics_LM(self,position, orientation=None, seed = None):
+        pos = PyKDL.Vector(position[0], position[1], position[2])
+        if orientation!=None:
+            rot = PyKDL.Rotation()
+            rot=rot.Quaternion(orientation[0], orientation[1], orientation[2], orientation[3])
+        seed_array = PyKDL.JntArray(self._num_jnts)
+        if seed!= None:
+            seed_array.resize(len(seed))
+            for idx, jnt in enumerate(seed):
+                seed_array[idx] = jnt
+        else:
+            seed_array = self.joints_to_kdl('positions')
+        
+        if orientation != None:
+            goal_pose = PyKDL.Frame(rot,pos)
+        else:
+            goal_pose = PyKDL.Frame(pos)
+        result_angles = PyKDL.JntArray(self._num_jnts)
+        if self._ik_p_lma_kdl.CartToJnt(seed_array, goal_pose, result_angles) >= 0:
+            result = np.array(list(result_angles))
+            return result
+        else:
+            print("did not return anything")
+            return None
+
+
     def inverse_kinematics(self, position, orientation=None, seed=None):
         ik = PyKDL.ChainIkSolverVel_pinv(self._arm_chain)
+        print(orientation)
         pos = PyKDL.Vector(position[0], position[1], position[2])
+        # print(orientation!= None)
         if orientation != None:
             rot = PyKDL.Rotation()
             rot = rot.Quaternion(orientation[0], orientation[1],
@@ -140,7 +171,7 @@ class baxter_kinematics(object):
             seed_array = self.joints_to_kdl('positions')
 
         # Make IK Call
-        if orientation:
+        if orientation !=None:
             goal_pose = PyKDL.Frame(rot, pos)
         else:
             goal_pose = PyKDL.Frame(pos)

@@ -8,6 +8,7 @@ import copy
 import tf
 import rospy
 import numpy as np
+import time
 
 import math
 import rospkg
@@ -139,10 +140,10 @@ class PickAndPlace(object):
         # thought away cube
         self.gripper_open()
  
-    def get_tf_start_to_end_frames(self, start_frame, end_frame):
+    def get_tf_start_to_end_frames(self):
  
-        start_frame = "/" + start_frame
-        end_frame = "/" + end_frame
+        start_frame = "/base"
+        end_frame = "/" + self._limb_name+"_gripper_base"
 
         trans, rot = None, None
         try:
@@ -237,145 +238,79 @@ def quaternion_to_euler(q_w, q_x, q_y, q_z):
     return roll, pitch, yaw
  
 def main():
-    roll = 0.7
-    pitch = 0.5
-    yaw = 0.2
     
-    x,y,z,w = euler_to_quaternion(roll, pitch, yaw)
-    print(quaternion_to_euler(x,y,z,w))
+    
+    
     rospy.init_node("ik_pick_and_place_demo")
- 
-    limb = 'left'
     hover_distance = 0 # meters
-    # Starting Joint angles for left arm
-    # starting_joint_angles_left = {'left_w0': 0.6699952259595108,
-    #                        'left_w1': 1.030009435085784,
-    #                        'left_w2': -0.4999997247485215,
-    #                         'left_e0': -1.189968899785275,
-    #                         'left_e1': 1.9400238130755056,
-    #                         'left_s0': -0.08000397926829805,
-    #                         'left_s1': -0.9999781166910306}
-
-    # starting_joint_angles_right = {'right_s0': 0.05829126993964572,
-    #                         'right_s1': -0.96027197321626,
-    #                         'right_w0': -0.6335340653966759,
-    #                         'right_w1': 0.9637234299890112,
-    #                         'right_w2': 0.4195437454866607,
-    #                         'right_e0': 1.2103108416415915,
-    #                         'right_e1': 1.9297478311598506}
+    # Starting Joint angles for left arm    
 
     
+    # starting_joint_angles_left = {'left_s0':  -0.76578,
+    #                         'left_s1': -0.91326,
+    #                         'left_e0': -0.047871,
+    #                         'left_e1': 1.5704,
+    #                         'left_w0': -0.029908,
+    #                         'left_w1': -0.65738,
+    #                         'left_w2': 0.052933}    
 
-    starting_joint_angles_left = {'left_e0':  -0.05292233718204677,
-                            'left_e1': 2.2741265180401258,
-                            'left_s0': -0.6830049458059805,
-                            'left_s1': -1.1389807350049197,
-                            'left_w0': 0.08130098175792692,
-                            'left_w1': -1.1094516048381255,
-                            'left_w2': -0.008053399136398421}
+    starting_joint_angles_left = {'left_s0':  -0,
+                            'left_s1': 0,
+                            'left_e0': 0,
+                            'left_e1': 0,
+                            'left_w0': 0,
+                            'left_w1': 0,
+                            'left_w2': 0}
 
-    starting_joint_angles_right = {'right_e0':  0.47131559707779336,
-                            'right_e1': 2.171349805251803,
-                            'right_s0': 0.11850001586414821,
-                            'right_s1': -1.0043739208679747,
-                            'right_w0': -0.22089323345549958,
-                            'right_w1': -1.07953897947436,
-                            'right_w2': -0.10967962633380708}
+    starting_joint_angles_right = {'right_s0': 0,
+                            'right_s1': 0,
+                            'right_e0': 0,
+                            'right_e1': 0,
+                            'right_w0': 0,
+                            'right_w1': 0,
+                            'right_w2': 0}
 
 
-    pnp_left = PickAndPlace(limb, hover_distance)
+
+
+    pnp_left = PickAndPlace('left', hover_distance)
+    print(pnp_left._limb_name)
     pnp_right = PickAndPlace('right', hover_distance)
-    trans, rot = pnp_left.get_tf_start_to_end_frames('left_hand','base')
-    # trans, rot = pp_left.get_tf_start_to_end_frames('Robot_1/base_link', 'base')
-    print(rot)
-    pnp_left.move_to_start(starting_joint_angles_left)
-    pnp_right.move_to_start(starting_joint_angles_right)
+
+    print(pnp_left.kin.forward_position_kinematics(starting_joint_angles_left))
+
+    # pnp_left.move_to_start(starting_joint_angles_left)
+    # pnp_right.move_to_start(starting_joint_angles_right)
     # An orientation for gripper fingers to be overhead and parallel to the obj
 
     # Move to the desired starting angles
     # pnp.move_to_start(starting_joint_angles)
-    while True:
-        print("collecting current_pose")
-        current_pose_left = pnp_left._limb.endpoint_pose()
-    
+    # string = input("start the demo: ")
 
-        current_orientation_left = Quaternion(
-                                    x = current_pose_left['orientation'].x,
-                                    y = current_pose_left['orientation'].y,
-                                    z = current_pose_left['orientation'].z,
-                                    w = current_pose_left['orientation'].w)
-        # r = Rotation.from_quat([current_orientation_left.x, current_orientation_left.y, current_orientation_left.z, current_orientation_left.w])
-
-        roll_left, pitch_left, yaw_left = quaternion_to_euler(current_pose_left['orientation'].x, current_pose_left['orientation'].y, current_pose_left['orientation'].z, current_pose_left['orientation'].w)
-        # print("roll = ",roll_left, "\n")
-        # print("pitch = ", pitch_left, "\n")
-        # print("yaw = ", yaw_left, "\n")
-        # print("Current pose left= ", current_pose_left)
-        # print("\n")
-        current_pose_right = pnp_right._limb.endpoint_pose()
-        current_orientation_right = Quaternion(
-                                    x = current_pose_right['orientation'].x,
-                                    y = current_pose_right['orientation'].y,
-                                    z = current_pose_right['orientation'].z,
-                                    w = current_pose_right['orientation'].w)
-        print("Current pose left = ", current_pose_left)
-        print("Current pose right= ", current_pose_right)
-        # print("\n")
-        roll_right, pitch_right, yaw_right = quaternion_to_euler(current_pose_right['orientation'].x, current_pose_right['orientation'].y, current_pose_right['orientation'].z, current_pose_right['orientation'].w)
-
-        x_left_new = input("x increment for left arm = ")
-        y_left_new = input("y increment for left arm = ")
-        z_left_new = input("z increment for left arm = ")
-        
-        x_quat_left_new = input("x quaternion for left arm = ")
-        y_quat_left_new = input("y quaternion for left arm = ")
-        z_quat_left_new = input("z quaternion for left arm = ")
-        w_quat_left_new = input("w quaternion for left arm = ")
-
-
-        # x_left, y_left, z_left, w_left = euler_to_quaternion(roll_left_new, pitch_left_new, yaw_left_new)
-        new_orientation_left = Quaternion(
-                                    x = current_orientation_left.x + x_quat_left_new,
-                                    y = current_orientation_left.y + y_quat_left_new,
-                                    z = current_orientation_left.z + z_quat_left_new,
-                                    w = current_orientation_left.w + w_quat_left_new)
-
-        x_right_new = input("x increment for right arm = ")
-        y_right_new = input("y increment for right arm = ")
-        z_right_new = input("z increment for right arm = ")
-        
-        x_quat_right_new = input("x quaternion for right arm = ")
-        y_quat_right_new = input("y quaternion for right arm = ")
-        z_quat_right_new = input("z quaternion for right arm = ")
-        w_quat_right_new = input("w quaternion for right arm = ")
-        # x_right, y_right, z_right, w_right = euler_to_quaternion(roll_right_new, pitch_right_new, yaw_right_new)
-        # x_right, y_right, z_right, w_right = euler_to_quaternion(-0.6326, 0.6344, 2.1545)
-        try_again = input("try")
-        new_orientation_right = Quaternion(
-                                    x = current_orientation_left.x  + x_quat_right_new,
-                                    y = current_orientation_right.y + y_quat_right_new,
-                                    z = current_orientation_right.z + z_quat_right_new,
-                                    w = current_orientation_right.w + w_quat_right_new)
-                                    
-        pose_left = Pose(position=Point(x=current_pose_left["position"].x + float(x_left_new), y= current_pose_left["position"].y +float(y_left_new), z= current_pose_left["position"].z +float(z_left_new)),
-                        orientation=new_orientation_left)
-        print("new pose left = ",pose_left)
-        pose_right = Pose(position=Point(x= current_pose_right["position"].x + float(x_right_new), y= current_pose_right["position"].y +float(y_right_new), z= current_pose_right["position"].z + float(z_right_new)),
-                        orientation=new_orientation_right)
-        print("new pose right = ",pose_right)
-
-        try:
-            joint_angles_left = pnp_left.ik_request(pose_left)
-            pnp_left._guarded_move_to_joint_position(joint_angles_left)
-
-        except:
-            print("did not converge left \n")
-        try:
-            joint_angles_right = pnp_right.ik_request(pose_right)
-
-            pnp_right._guarded_move_to_joint_position(joint_angles_right)
-        except:
-            print("did not converge right \n")
+    # time.sleep(5)
+    try:
+        while True:
+            stage = int(input("enter stage to go to: "))
+            if stage == 0:
+                pnp_left._guarded_move_to_joint_position(starting_joint_angles_left)
+                pnp_right._guarded_move_to_joint_position(starting_joint_angles_right)
+                # time.sleep(2)
+            elif stage == 1:
+                pnp_left._guarded_move_to_joint_position(first_joint_angles_left)
+                pnp_right._guarded_move_to_joint_position(first_joint_angles_right)
+                # time.sleep(2)
+            elif stage == 2:
+                pnp_left._guarded_move_to_joint_position(second_joint_angles_left)
+                pnp_right._guarded_move_to_joint_position(second_joint_angles_right)
+                # time.sleep(2)
+            elif stage == 3:
+                pnp_left._guarded_move_to_joint_position(third_joint_angles_left)
+                pnp_right._guarded_move_to_joint_position(third_joint_angles_right)
+                # time.sleep(2)
+            else:
+                continue
+    except KeyboardInterrupt:
+        print("loop interuppted")
 
     return 0
  
